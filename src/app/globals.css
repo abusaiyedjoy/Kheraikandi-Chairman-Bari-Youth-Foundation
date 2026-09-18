@@ -1,26 +1,162 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand Palette */
+  --background: #F8FAF7;
+  --foreground: #172018;
+  --card: #FFFFFF;
+  --card-foreground: #172018;
+  --popover: #FFFFFF;
+  --popover-foreground: #172018;
+  
+  /* Primary: Deep Emerald Green */
+  --primary: #166534;
+  --primary-foreground: #FFFFFF;
+  
+  /* Secondary: Fresh Green */
+  --secondary: #22C55E;
+  --secondary-foreground: #0A2F12;
+  
+  /* Accent: Prestigious Gold */
+  --accent: #D4A72C;
+  --accent-foreground: #1A1402;
+  
+  /* Neutral / Muted */
+  --muted: #EBF1EA;
+  --muted-foreground: #506152;
+  
+  /* Feedback */
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  
+  /* Borders & Inputs */
+  --border: #DDE5DC;
+  --input: #DDE5DC;
+  --ring: #166534;
+  
+  --radius: 0.75rem;
+}
+
+.dark {
+  /* Dark Forest Mode */
+  --background: #0B120C;
+  --foreground: #F1F5F2;
+  --card: #121C14;
+  --card-foreground: #F1F5F2;
+  --popover: #121C14;
+  --popover-foreground: #F1F5F2;
+  
+  /* In dark mode, primary becomes vivid emerald for high accessibility */
+  --primary: #22C55E;
+  --primary-foreground: #052E16;
+  
+  /* Secondary becomes deep emerald container */
+  --secondary: #166534;
+  --secondary-foreground: #ECFDF5;
+  
+  /* Accent Gold */
+  --accent: #EAB308;
+  --accent-foreground: #1A1402;
+  
+  --muted: #1A281E;
+  --muted-foreground: #99AB9D;
+  
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  
+  --border: #233627;
+  --input: #233627;
+  --ring: #22C55E;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Direct Brand Utility Tokens */
+  --color-brand-emerald: #166534;
+  --color-brand-green: #22C55E;
+  --color-brand-gold: #D4A72C;
+  --color-brand-bg: #F8FAF7;
+  --color-brand-dark: #172018;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-sans: var(--font-geist-sans), "Hind Siliguri", system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Animations & glass utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.glass-panel {
+  background: color-mix(in srgb, var(--card) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
