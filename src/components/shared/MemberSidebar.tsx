@@ -10,6 +10,11 @@ import {
   Bell,
   LogOut,
   Sparkles,
+  User,
+  CalendarDays,
+  Receipt,
+  Building2,
+  Settings,
 } from "lucide-react";
 import { ORG } from "@/lib/constants";
 import { CurrencyDisplay } from "./CurrencyDisplay";
@@ -21,22 +26,29 @@ interface MemberSidebarProps {
   memberName?: string;
   memberId?: string;
   className?: string;
+  onLogout?: () => void;
 }
 
 const memberNavItems = [
-  { href: "/member", label: "আমার ড্যাশবোর্ড", icon: LayoutDashboard },
-  { href: "/member/savings", label: "আমার সঞ্চয় (৯০%)", icon: PiggyBank },
-  { href: "/member/contributions", label: "চাঁদা বিবরণী", icon: Wallet },
-  { href: "/member/activities", label: "সমাজকল্যাণ কার্যক্রম", icon: Heart },
-  { href: "/member/notices", label: "নোটিশ বোর্ড", icon: Bell },
+  { href: "/member/dashboard", label: "ড্যাশবোর্ড", icon: LayoutDashboard },
+  { href: "/member/profile", label: "আমার প্রোফাইল", icon: User },
+  { href: "/member/contributions", label: "মাসিক জমা", icon: CalendarDays },
+  { href: "/member/savings", label: "আমার সঞ্চয়", icon: PiggyBank },
+  { href: "/member/transactions", label: "লেনদেন", icon: Wallet },
+  { href: "/member/fund-overview", label: "সংগঠনের তহবিল", icon: Building2 },
+  { href: "/member/expenses", label: "খরচের হিসাব", icon: Receipt },
+  { href: "/member/activities", label: "কার্যক্রম", icon: Heart },
+  { href: "/member/notices", label: "নোটিশ", icon: Bell },
+  { href: "/member/settings", label: "সেটিংস", icon: Settings },
 ];
 
 export function MemberSidebar({
-  currentPath = "/member",
+  currentPath = "/member/dashboard",
   memberSavings = 5400,
-  memberName = "মোহাম্মদ রফিকুল ইসলাম",
-  memberId = "KYK-001",
+  memberName = "আবু সাইয়েদ",
+  memberId = "KCYW-00125",
   className,
+  onLogout,
 }: MemberSidebarProps) {
   return (
     <aside
@@ -47,7 +59,7 @@ export function MemberSidebar({
     >
       {/* Brand Header */}
       <div className="flex h-16 items-center px-5 border-b border-border">
-        <Link href="/member" className="flex items-center gap-2.5">
+        <Link href="/member/dashboard" className="flex items-center gap-2.5">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-700 text-white shadow-xs">
             <Sparkles className="h-4 w-4 text-amber-300" />
           </div>
@@ -65,8 +77,8 @@ export function MemberSidebar({
       {/* Member Savings Glance Widget */}
       <div className="p-4 border-b border-border bg-emerald-50/40 dark:bg-emerald-950/20">
         <div className="flex items-center justify-between text-[11px] text-muted-foreground mb-1">
-          <span>মোট আমানত (৯০% সঞ্চয়)</span>
-          <span className="font-mono">{memberId}</span>
+          <span>আমার সঞ্চয় (৯০%)</span>
+          <span className="font-mono text-emerald-700 dark:text-emerald-400">{memberId}</span>
         </div>
         <CurrencyDisplay
           amount={memberSavings}
@@ -80,10 +92,11 @@ export function MemberSidebar({
       </div>
 
       {/* Navigation List */}
-      <div className="flex-1 overflow-y-auto p-3 space-y-1">
+      <div className="flex-1 overflow-y-auto p-3 space-y-0.5">
         {memberNavItems.map((item) => {
           const Icon = item.icon;
-          const isActive = currentPath === item.href;
+          const isActive = currentPath === item.href ||
+            (item.href !== "/member/dashboard" && currentPath.startsWith(item.href));
 
           return (
             <Link
@@ -110,13 +123,24 @@ export function MemberSidebar({
             <p className="font-bold text-xs text-foreground truncate">{memberName}</p>
             <p className="text-[10px] text-muted-foreground font-mono">{memberId}</p>
           </div>
-          <Link
-            href="/"
-            className="p-1.5 rounded text-muted-foreground hover:text-red-500 transition-colors"
-            title="লগআউট"
-          >
-            <LogOut className="h-4 w-4" />
-          </Link>
+          {onLogout ? (
+            <button
+              type="button"
+              onClick={onLogout}
+              className="p-1.5 rounded text-muted-foreground hover:text-red-500 transition-colors"
+              title="লগআউট"
+            >
+              <LogOut className="h-4 w-4" />
+            </button>
+          ) : (
+            <Link
+              href="/"
+              className="p-1.5 rounded text-muted-foreground hover:text-red-500 transition-colors"
+              title="লগআউট"
+            >
+              <LogOut className="h-4 w-4" />
+            </Link>
+          )}
         </div>
       </div>
     </aside>

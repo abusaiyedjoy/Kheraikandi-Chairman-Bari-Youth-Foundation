@@ -24,13 +24,16 @@ interface MobileNavigationProps {
   className?: string;
 }
 
-const defaultItems: MobileNavItem[] = [
-  { label: "হোম", href: "/", icon: LayoutDashboard },
+export const memberMobileNavItems: MobileNavItem[] = [
+  { label: "ড্যাশবোর্ড", href: "/member/dashboard", icon: LayoutDashboard },
   { label: "সঞ্চয়", href: "/member/savings", icon: PiggyBank },
-  { label: "চাঁদা", href: "/member/contributions", icon: Wallet },
+  { label: "লেনদেন", href: "/member/transactions", icon: Wallet },
   { label: "কার্যক্রম", href: "/member/activities", icon: Heart },
   { label: "নোটিশ", href: "/member/notices", icon: Bell },
 ];
+
+// Legacy default items kept for backward compatibility
+const defaultItems: MobileNavItem[] = memberMobileNavItems;
 
 export function MobileNavigation({
   currentPath = "/",
@@ -49,7 +52,11 @@ export function MobileNavigation({
       <div className="flex h-16 items-center justify-around px-2">
         {items.map((item) => {
           const Icon = item.icon;
-          const isActive = currentPath === item.href;
+          const isActive =
+            currentPath === item.href ||
+            (item.href !== "/member/dashboard" &&
+              item.href !== "/" &&
+              currentPath.startsWith(item.href));
 
           return (
             <Link
