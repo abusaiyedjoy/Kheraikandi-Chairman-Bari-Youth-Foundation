@@ -52,27 +52,37 @@ export function SiteFooter({ className }: SiteFooterProps) {
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
-                  মূল পাতা (Home)
+                  মূল পাতা
                 </Link>
               </li>
               <li>
-                <Link href="/member" className="hover:text-foreground transition-colors">
-                  সদস্য সঞ্চয় পোর্টাল
+                <Link href="/about" className="hover:text-foreground transition-colors">
+                  আমাদের সম্পর্কে
                 </Link>
               </li>
               <li>
-                <Link href="/admin" className="hover:text-foreground transition-colors">
-                  প্রশাসনিক ড্যাশবোর্ড
+                <Link href="/activities" className="hover:text-foreground transition-colors">
+                  সামাজিক কার্যক্রম
                 </Link>
               </li>
               <li>
-                <Link href="/#notices" className="hover:text-foreground transition-colors">
-                  সাম্প্রতিক নোটিশসমূহ
+                <Link href="/notices" className="hover:text-foreground transition-colors">
+                  নোটিশ বোর্ড
                 </Link>
               </li>
               <li>
-                <Link href="/#activities" className="hover:text-foreground transition-colors">
-                  সামাজিক সেবা কার্যক্রম
+                <Link href="/financial-transparency" className="hover:text-foreground transition-colors">
+                  আর্থিক স্বচ্ছতা
+                </Link>
+              </li>
+              <li>
+                <Link href="/members" className="hover:text-foreground transition-colors">
+                  সদস্য তালিকা
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-foreground transition-colors">
+                  যোগাযোগ
                 </Link>
               </li>
             </ul>

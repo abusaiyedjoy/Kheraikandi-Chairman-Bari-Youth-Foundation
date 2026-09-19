@@ -27,10 +27,12 @@ export function SiteNavbar({ currentPath = "/", className }: SiteNavbarProps) {
 
   const navLinks = [
     { label: "হোম", href: "/" },
-    { label: "সঞ্চয় নীতি (৯০/১০)", href: "/#savings-rule" },
-    { label: "কার্যক্রম", href: "/#activities" },
-    { label: "নোটিশ বোর্ড", href: "/#notices" },
-    { label: "আর্থিক স্বচ্ছতা", href: "/#transparency" },
+    { label: "আমাদের সম্পর্কে", href: "/about" },
+    { label: "কার্যক্রম", href: "/activities" },
+    { label: "আর্থিক স্বচ্ছতা", href: "/financial-transparency" },
+    { label: "সদস্য", href: "/members" },
+    { label: "নোটিশ", href: "/notices" },
+    { label: "যোগাযোগ", href: "/contact" },
   ];
 
   return (
@@ -85,26 +87,15 @@ export function SiteNavbar({ currentPath = "/", className }: SiteNavbarProps) {
             <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 text-sky-400" />
           </button>
 
-          {/* Member Portal Button */}
+          {/* Member Login CTA */}
           <div className="hidden sm:flex items-center gap-2">
             <Link href="/member">
               <Button
-                variant="outline"
                 size="sm"
-                leftIcon={<Users className="h-3.5 w-3.5 text-emerald-700 dark:text-emerald-400" />}
-                className="text-xs"
+                leftIcon={<Users className="h-3.5 w-3.5" />}
+                className="text-xs shadow-xs font-semibold"
               >
-                সদস্য পোর্টাল
-              </Button>
-            </Link>
-
-            <Link href="/admin">
-              <Button
-                size="sm"
-                leftIcon={<Shield className="h-3.5 w-3.5" />}
-                className="text-xs"
-              >
-                অ্যাডমিন
+                সদস্য লগইন
               </Button>
             </Link>
           </div>
@@ -144,21 +135,11 @@ export function SiteNavbar({ currentPath = "/", className }: SiteNavbarProps) {
           <div className="flex flex-col gap-2 pt-3 border-t border-border">
             <Link href="/member" onClick={() => setMobileMenuOpen(false)}>
               <Button
-                variant="outline"
                 size="sm"
                 leftIcon={<Users className="h-4 w-4" />}
                 className="w-full justify-center"
               >
-                সদস্য পোর্টাল
-              </Button>
-            </Link>
-            <Link href="/admin" onClick={() => setMobileMenuOpen(false)}>
-              <Button
-                size="sm"
-                leftIcon={<Shield className="h-4 w-4" />}
-                className="w-full justify-center"
-              >
-                অ্যাডমিন প্যানেল
+                সদস্য লগইন
               </Button>
             </Link>
           </div>

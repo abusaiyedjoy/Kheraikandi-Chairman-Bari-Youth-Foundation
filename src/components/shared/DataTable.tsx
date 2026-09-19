@@ -93,8 +93,8 @@ export function DataTable<TData extends Record<string, unknown>>({
     if (!column) return filteredData;
 
     return [...filteredData].sort((a, b) => {
-      let aVal = column.accessorFn ? column.accessorFn(a) : column.accessorKey ? a[column.accessorKey] : "";
-      let bVal = column.accessorFn ? column.accessorFn(b) : column.accessorKey ? b[column.accessorKey] : "";
+      let aVal: any = column.accessorFn ? column.accessorFn(a) : column.accessorKey ? a[column.accessorKey] : "";
+      let bVal: any = column.accessorFn ? column.accessorFn(b) : column.accessorKey ? b[column.accessorKey] : "";
 
       if (typeof aVal === "string") aVal = aVal.toLowerCase();
       if (typeof bVal === "string") bVal = bVal.toLowerCase();
@@ -255,7 +255,7 @@ export function DataTable<TData extends Record<string, unknown>>({
                 <tbody className="divide-y divide-border/60">
                   {paginatedData.map((row, rowIdx) => (
                     <tr
-                      key={row.id ?? rowIdx}
+                      key={String((row as Record<string, unknown>).id ?? rowIdx)}
                       className="hover:bg-muted/30 transition-colors"
                     >
                       {columns.map((col, colIdx) => {
@@ -286,13 +286,13 @@ export function DataTable<TData extends Record<string, unknown>>({
           >
             {paginatedData.map((row, idx) => {
               if (mobileCardRender) {
-                return <div key={row.id ?? idx}>{mobileCardRender(row, idx)}</div>;
+                return <div key={String((row as Record<string, unknown>).id ?? idx)}>{mobileCardRender(row, idx)}</div>;
               }
 
               // Automatic fallback card if mobileCardRender is not provided
               return (
                 <div
-                  key={row.id ?? idx}
+                  key={String((row as Record<string, unknown>).id ?? idx)}
                   className="rounded-xl border border-border bg-card p-4 shadow-xs space-y-2 text-xs"
                 >
                   {columns.map((col, cIdx) => (
